@@ -5,21 +5,22 @@ import json
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
 }
-
+class article:
+    def __init__(self, title, url, content):
+        self.title = title
+        self.url = url
+        self.content = content
 
 response = requests.get("https://www.rp.pl/wydarzenia/kraj/polityka", headers=headers)
 soup = BeautifulSoup(response.content, 'html.parser')
-a_tags = soup.find_all("a", class_="contentLink")
+anchors = soup.find_all('a', class_="contentLink")
 
 articles = []
+for anchor in anchors:
+    if len(anchor.text) >=10:
+        articles.append(article(anchor.get_text(strip=True), anchor.get('href'), "123"))
 
-for a in a_tags:
-    h2 = a.find("h2")
-    if h2:
-        title = h2.get_text(strip=True)
-        link = a.get("href")
-        articles.append({"title": title, "link": link})
-
-for art in articles:
-    print(art["title"], "|", art["link"])
-
+for article in articles:
+    print(article.title)
+    print(article.url)
+    print(article.content)

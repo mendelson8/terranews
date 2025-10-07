@@ -25,4 +25,10 @@ public class Article {
     private String source;
     public LocalDateTime date;
 
+    public Article(String title, String content, String source, LocalDateTime date) {
+        this.title = title;
+        this.content = content;
+        this.source = source;
+        this.date = date;
+    }
 }

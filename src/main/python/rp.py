@@ -24,3 +24,13 @@ for article in articles:
     print(article.title)
     print(article.url)
     print(article.content)
+
+#have to find a way to get around pay wall
+
+response = requests.get("https://www.rp.pl/polityka/art43140101-parlament-europejski-zaglosowal-w-sprawie-immunitetow-daniela-obajtka-i-michala-dworczyka", headers=headers)
+soup = BeautifulSoup(response.content, 'html.parser')
+print(soup.prettify())
+paragraphs = soup.find_all('p', class_="articleBodyBlock")
+for paragraph in paragraphs:
+    print(paragraph.get_text(strip=True))
+

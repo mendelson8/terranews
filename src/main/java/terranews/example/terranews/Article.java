@@ -22,6 +22,8 @@ public class Article {
     private String title;
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column(unique = true)
     private String source;
     public LocalDateTime date;
 

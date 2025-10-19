@@ -1,6 +1,4 @@
 package terranews.example.terranews;
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "articles")
 @Getter
@@ -21,6 +18,9 @@ public class Article {
     private Long id;
 
     private String title;
+
+    @Column
+    private String image;
 
     @Column(columnDefinition = "TEXT")
     private String content;

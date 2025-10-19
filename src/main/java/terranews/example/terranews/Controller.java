@@ -1,5 +1,5 @@
 package terranews.example.terranews;
-
+import terranews.example.terranews.ArticleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
@@ -7,18 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class Controller {
     @Autowired
     ArticleRepository articleRepository;
+    @Autowired
+    ArticleService articleService;
 
     @RequestMapping("/")
-    String home() {
-        return "Hello World!";
-    }
-
-    @RequestMapping("articles")
-    public @ResponseBody Iterable<Article> articles() {
-        return articleRepository.findAll();
+    long home() {
+        return articleRepository.count();
     }
 
     @PostMapping("/addBatch")
@@ -36,4 +34,15 @@ public class Controller {
         System.out.println(i);
         return "Articles added";
     }
+
+    @RequestMapping("/api/articles")
+    public List<ArticleDto> getArticles() {
+        return articleService.getAllArticlesWithBias();
+    }
+
+    @RequestMapping("/api/articles/{articleId}")
+    public List<ArticleDto> getArticle(@PathVariable("articleId") long articleId) {
+        return articleService.getArticleWithBiasWithId(articleId);
+    }
 }
+

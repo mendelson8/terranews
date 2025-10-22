@@ -11,13 +11,9 @@ class article:
         self.title = title
         self.content = content
         self.source = source
-
-        # Ta logika działa idealnie dla formatu daty z money.pl
         parsed_date_naive = datetime.strptime(date, '%a, %d %b %Y %H:%M:%S %z')
         dt_utc = parsed_date_naive.replace(tzinfo=ZoneInfo("UTC"))
         dt_poland = dt_utc.astimezone(ZoneInfo("Europe/Warsaw"))
-
-        # Wysyłamy datę bez strefy czasowej, zgodnie z wymaganiami serwera
         self.date = dt_poland.strftime('%Y-%m-%dT%H:%M:%S')
 
     def to_dict(self):
@@ -28,15 +24,12 @@ class article:
             "date": self.date
         }
 
-
-# ZMIANA: Adres URL kanału RSS dla money.pl
 url = "https://www.money.pl/rss/wiadomosci.xml"
 
 feed = feedparser.parse(url).entries
 articles = []
 
 for item in feed:
-    # W `item.published` jest data np. "Wed, 15 Oct 2025 12:15:00 +0200"
     articles.append(article(item.title, item.summary, item.link, item.published))
 
 articles_json = [a.to_dict() for a in articles]

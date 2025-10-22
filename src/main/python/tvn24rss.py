@@ -25,9 +25,6 @@ class article:
             "source": self.source,
             "date": self.date
         }
-
-
-# Jedyna zmiana jest tutaj
 url = "https://tvn24.pl/najwazniejsze.xml"
 
 feed = feedparser.parse(url).entries

@@ -34,7 +34,7 @@ while True:
                 full_text = title + " " + soup.get_text(separator=' ', strip=True)
                 vector = model.encode(full_text)
 
-                # POPRAWKA: Przeszukujemy wszystkie artykuły, które już mają wektor
+
                 cur.execute(
                     """
                     SELECT cluster_id FROM articles

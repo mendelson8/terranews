@@ -30,7 +30,6 @@ while True:
                 print(f"Przetwarzam artykuł o ID: {article_id}")
 
                 soup = BeautifulSoup(raw_content, 'html.parser')
-                # Łączymy tytuł z treścią dla lepszej jakości wektora
                 full_text = title + " " + soup.get_text(separator=' ', strip=True)
                 vector = model.encode(full_text)
 

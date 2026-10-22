@@ -13,12 +13,6 @@ Features:
 Tech Stack:
 - Backend: Java (Spring Boot), PostgreSQL
 - Machine Learning: Python, Sentence Transformers, BeautifulSoup
-- Frontend: REST API
-
-Future Enhancements:
-- Add a frontend for better user interaction.
-- Implement real-time article updates.
-- Expand the bias map to include more sources.
 
 Author:
 Mendelson8
